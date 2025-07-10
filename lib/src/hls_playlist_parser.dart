@@ -68,6 +68,7 @@ class HlsPlaylistParser {
   static const String REGEXP_AVERAGE_BANDWIDTH = r'AVERAGE-BANDWIDTH=(\d+)\b';
   static const String REGEXP_VIDEO = 'VIDEO="(.+?)"';
   static const String REGEXP_AUDIO = 'AUDIO="(.+?)"';
+  static const String REGEXP_AUDIO_CONTENT_ID = 'YT-EXT-AUDIO-CONTENT-ID="(.+?)"';
   static const String REGEXP_SUBTITLES = 'SUBTITLES="(.+?)"';
   static const String REGEXP_CLOSED_CAPTIONS = 'CLOSED-CAPTIONS="(.+?)"';
   static const String REGEXP_BANDWIDTH = r'[^-]BANDWIDTH=(\d+)\b';
@@ -298,6 +299,12 @@ class HlsPlaylistParser {
           variableDefinitions: variableDefinitions,
         );
 
+        var audioContentId = _parseStringAttr(
+          source: line,
+          pattern: REGEXP_AUDIO_CONTENT_ID,
+          variableDefinitions: variableDefinitions,
+        );
+
         extraLines.moveNext();
 
         var referenceUri = _parseStringAttr(
@@ -325,6 +332,7 @@ class HlsPlaylistParser {
           audioGroupId: audioGroupId,
           subtitleGroupId: subtitlesGroupId,
           captionGroupId: closedCaptionsGroupId,
+          audioContentId: audioContentId,
         ));
 
         var variantInfosForUrl = urlToVariantInfos[uri];

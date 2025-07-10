@@ -8,6 +8,7 @@ class Variant {
     required this.audioGroupId,
     required this.subtitleGroupId,
     required this.captionGroupId,
+    this.audioContentId,
   });
 
   /// The variant's url.
@@ -28,6 +29,8 @@ class Variant {
   /// The caption rendition group referenced by this variant, or [Null].
   final String? captionGroupId;
 
+  final String? audioContentId;
+
   /// Returns a copy of this instance with the given [Format].
   Variant copyWithFormat(Format format) => Variant(
         url: url,
@@ -36,5 +39,6 @@ class Variant {
         audioGroupId: audioGroupId,
         subtitleGroupId: subtitleGroupId,
         captionGroupId: captionGroupId,
+        audioContentId: audioContentId,
       );
 }
